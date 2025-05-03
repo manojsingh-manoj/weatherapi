@@ -20,6 +20,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.hamcrest.Matchers.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -47,8 +48,8 @@ public class WeatherApiRestControllerTest {
     public void testWeatherEndpointWithPOST() throws Exception {
         Weather expectedRecord = getTestData().get("chicago");
         Weather actualRecord = om.readValue(mockMvc.perform(post("/weather")
-                .contentType("application/json")
-                .content(om.writeValueAsString(getTestData().get("chicago"))))
+                        .contentType("application/json")
+                        .content(om.writeValueAsString(getTestData().get("chicago"))))
                 .andDo(print())
                 .andExpect(jsonPath("$.id", greaterThan(0)))
                 .andExpect(status().isCreated()).andReturn().getResponse().getContentAsString(), Weather.class);
@@ -65,8 +66,8 @@ public class WeatherApiRestControllerTest {
 
         for (Map.Entry<String, Weather> kv : data.entrySet()) {
             expectedRecords.add(om.readValue(mockMvc.perform(post("/weather")
-                    .contentType("application/json")
-                    .content(om.writeValueAsString(kv.getValue())))
+                            .contentType("application/json")
+                            .content(om.writeValueAsString(kv.getValue())))
                     .andDo(print())
                     .andExpect(status().isCreated()).andReturn().getResponse().getContentAsString(), Weather.class));
         }
@@ -93,8 +94,8 @@ public class WeatherApiRestControllerTest {
 
         for (Map.Entry<String, Weather> kv : data.entrySet()) {
             expectedRecords.add(om.readValue(mockMvc.perform(post("/weather")
-                    .contentType("application/json")
-                    .content(om.writeValueAsString(kv.getValue())))
+                            .contentType("application/json")
+                            .content(om.writeValueAsString(kv.getValue())))
                     .andDo(print())
                     .andExpect(status().isCreated()).andReturn().getResponse().getContentAsString(), Weather.class));
         }
@@ -124,8 +125,8 @@ public class WeatherApiRestControllerTest {
 
         for (Map.Entry<String, Weather> kv : getTestData().entrySet()) {
             originalResponse.add(om.readValue(mockMvc.perform(post("/weather")
-                    .contentType("application/json")
-                    .content(om.writeValueAsString(kv.getValue())))
+                            .contentType("application/json")
+                            .content(om.writeValueAsString(kv.getValue())))
                     .andDo(print())
                     .andExpect(status().isCreated()).andReturn().getResponse().getContentAsString(), Weather.class));
         }
@@ -171,8 +172,8 @@ public class WeatherApiRestControllerTest {
 
         for (Map.Entry<String, Weather> kv : getTestData().entrySet()) {
             expectedRecords.add(om.readValue(mockMvc.perform(post("/weather")
-                    .contentType("application/json")
-                    .content(om.writeValueAsString(kv.getValue())))
+                            .contentType("application/json")
+                            .content(om.writeValueAsString(kv.getValue())))
                     .andDo(print())
                     .andExpect(status().isCreated()).andReturn().getResponse().getContentAsString(), Weather.class));
         }
@@ -206,13 +207,13 @@ public class WeatherApiRestControllerTest {
     @Test
     public void testWeatherEndpointWithGETById() throws Exception {
         Weather expectedRecord = om.readValue(mockMvc.perform(post("/weather")
-                .contentType("application/json")
-                .content(om.writeValueAsString(getTestData().get("chicago"))))
+                        .contentType("application/json")
+                        .content(om.writeValueAsString(getTestData().get("chicago"))))
                 .andDo(print())
                 .andExpect(status().isCreated()).andReturn().getResponse().getContentAsString(), Weather.class);
 
         Weather actualRecord = om.readValue(mockMvc.perform(get("/weather/" + expectedRecord.getId())
-                .contentType("application/json"))
+                        .contentType("application/json"))
                 .andDo(print())
                 .andExpect(status().isOk()).andReturn().getResponse().getContentAsString(), Weather.class);
 

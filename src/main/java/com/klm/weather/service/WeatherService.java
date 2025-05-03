@@ -1,7 +1,9 @@
 package com.klm.weather.service;
 
+import com.klm.weather.exception.WeatherIdNotFoundException;
 import com.klm.weather.model.Weather;
 import com.klm.weather.repository.WeatherRepository;
+import com.klm.weather.util.Constant;
 import org.springframework.stereotype.Service;
 
 
@@ -20,7 +22,10 @@ public class WeatherService {
     }
 
     public Weather getWeatherById(Integer id) {
-        return null;
+        if (id == null) {
+            throw new IllegalArgumentException(Constant.STR_WEATHER_ID_NOT_FOUND);
+        }
+        return weatherRepository.findById(id).orElseThrow(()-> new WeatherIdNotFoundException(Constant.STR_WEATHER_ID_NOT_FOUND));
     }
 
     public Weather addWeather(Weather weather) {

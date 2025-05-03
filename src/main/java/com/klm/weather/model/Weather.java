@@ -1,7 +1,10 @@
 package com.klm.weather.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 import java.util.List;
@@ -10,8 +13,10 @@ import java.util.List;
 public class Weather {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
 
     private Float lat;

@@ -26,11 +26,11 @@ public class WeatherApiRestController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Weather> getWeatherById(@PathVariable Integer id) {
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().body(weatherService.getWeatherById(id));
     }
 
     @PostMapping()
     public ResponseEntity<Weather> addWeather(@RequestBody Weather weather) {
-        return ResponseEntity.ok().build();
+        return ResponseEntity.status(HttpStatus.CREATED).body(weatherService.addWeather(weather));
     }
 }
