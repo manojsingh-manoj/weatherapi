@@ -9,6 +9,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 import java.util.List;
 
+
+/**
+ * Entity representing a weather record.
+ */
 @Entity
 public class Weather {
 
@@ -26,6 +30,17 @@ public class Weather {
 
     private List<Double> temperatures;
 
+    /**
+     * Constructs a new Weather with all fields.
+     *
+     * @param id the ID
+     * @param date the date
+     * @param lat the latitude
+     * @param lon the longitude
+     * @param city the city
+     * @param state the state
+     * @param temperatures the list of temperatures
+     */
     public Weather(Integer id, Date date, Float lat, Float lon, String city, String state, List<Double> temperatures) {
         this.id = id;
         this.date = date;
@@ -36,6 +51,16 @@ public class Weather {
         this.temperatures = temperatures;
     }
 
+    /**
+     * Constructs a new Weather without an ID.
+     *
+     * @param date the date
+     * @param lat the latitude
+     * @param lon the longitude
+     * @param city the city
+     * @param state the state
+     * @param temperatures the list of temperatures
+     */
     public Weather(Date date, Float lat, Float lon, String city, String state, List<Double> temperatures) {
         this.date = date;
         this.lat = lat;
@@ -45,6 +70,9 @@ public class Weather {
         this.temperatures = temperatures;
     }
 
+    /**
+     * Default constructor.
+     */
     public Weather() {
     }
 
