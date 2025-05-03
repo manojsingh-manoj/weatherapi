@@ -21,4 +21,10 @@ public class GlobalExceptionHandler {
         Errors errors = new Errors(Constant.CODE_WEATHER_ID_IS_NULL, illegalArgumentException.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errors);
     }
+
+    @ExceptionHandler(value = {InvalidDateFormatException.class})
+    public ResponseEntity<Errors> handleInvalidDateFormatException(InvalidDateFormatException invalidDateFormatException) {
+        Errors errors = new Errors(Constant.CODE_WEATHER_ID_IS_NULL, invalidDateFormatException.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errors);
+    }
 }

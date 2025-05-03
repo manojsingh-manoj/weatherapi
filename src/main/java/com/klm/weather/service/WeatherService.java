@@ -4,6 +4,7 @@ import com.klm.weather.exception.WeatherIdNotFoundException;
 import com.klm.weather.model.Weather;
 import com.klm.weather.repository.WeatherRepository;
 import com.klm.weather.util.Constant;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 
@@ -18,7 +19,8 @@ public class WeatherService {
     }
 
     public List<Weather> getWeather(String sort, String date, String city) {
-        return null;
+        Sort sortCriteria = Sort.by(Sort.Direction.ASC, "id");
+        return weatherRepository.findAll(sortCriteria);
     }
 
     public Weather getWeatherById(Integer id) {

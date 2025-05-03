@@ -21,7 +21,7 @@ public class WeatherApiRestController {
 
     @GetMapping
     public ResponseEntity<List<Weather>> getWeather(@RequestParam(required = false) String sort, @RequestParam(required = false) String date, @RequestParam(required = false) String city) {
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().body(weatherService.getWeather(sort, date, city));
     }
 
     @GetMapping("/{id}")
