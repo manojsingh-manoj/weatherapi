@@ -50,18 +50,16 @@ The Weather API allows users to manage weather records, including temperature da
 
 4. **Configure Database**:
     - The application uses an in-memory H2 database by default for development and testing.
-    - For production, configure a persistent database (e.g., PostgreSQL) in `src/main/resources/application.yml`.
+    - For production, configure a persistent database (e.g., H2) in `src/main/resources/application.properties`.
 
-   Example `application.yml` for PostgreSQL:
-   ```yaml
-   spring:
-     datasource:
-       url: jdbc:postgresql://localhost:5432/weatherdb
-       username: your_username
-       password: your_password
-     jpa:
-       hibernate:
-         ddl-auto: update
+   Example `application.properties` for H2:
+   ```bash
+   spring.h2.console.path=/h2-console
+   spring.datasource.url=jdbc:h2:mem:weatherdb
+   spring.datasource.driver-class-name=org.h2.Driver
+
+   spring.datasource.username=admin
+   spring.datasource.password=password
    ```
 
 ## Running the Application
@@ -79,8 +77,8 @@ The Weather API allows users to manage weather records, including temperature da
    ```
 
 3. **Access the Application**:
-    - The API is available at `http://localhost:8080`.
-    - Swagger UI: `http://localhost:8080/swagger-ui.html`.
+    - The API is available at `http://localhost:8000`.
+    - Swagger UI: `http://localhost:8000/swagger-ui.html`.
 
 ## API Endpoints
 
@@ -113,12 +111,12 @@ curl -X POST http://localhost:8080/weather \
 
 **Retrieve Filtered Records**:
 ```bash
-curl http://localhost:8080/weather?city=New%20York&date=2023-10-01&sort=date
+curl http://localhost:8000/weather?city=New%20York&date=2023-10-01&sort=date
 ```
 
 **Retrieve by ID**:
 ```bash
-curl http://localhost:8080/weather/1
+curl http://localhost:8000/weather/1
 ```
 
 ## Data Model
@@ -160,6 +158,7 @@ Common error codes:
 - **E1001**: Weather record not found.
 - **E1002**: Weather ID is null.
 - **E1003**: Invalid date format.
+- **E1004**: Invalid sort parameter.
 
 ## Testing
 
@@ -169,6 +168,5 @@ Common error codes:
    ```
 
 2. **Test Coverage**:
-    - Integration tests: `WeatherApiRestControllerTest` covers controller endpoints.
-    - Unit tests: `WeatherServiceTest` covers service layer logic.
+    - Unit tests: `WeatherApiRestControllerTest` covers controller endpoints.
     - Tests include happy paths, filtering, sorting, and error scenarios.
