@@ -25,4 +25,9 @@ public class Constant {
     public static final String CODE_INVALID_DATE_FORMAT = "E1003";
     /** Error message for invalid date format. */
     public static final String STR_INVALID_DATE_FORMAT     = "Date format not correct.";
+
+    /** Error code for invalid sort parameter. */
+    public static final String CODE_INVALID_SORT_PARAM = "E1005";
+    /** Error message for invalid sort parameter. */
+    public static final String STR_INVALID_SORT_PARAM = "Invalid sort parameter.";
 }
